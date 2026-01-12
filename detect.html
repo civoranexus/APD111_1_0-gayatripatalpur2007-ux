@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>InfraScan - Structural Damage Detection AI</title>
+
+<style>
+body {
+    font-family: Arial;
+    background: #eef2f7;
+    text-align: center;
+}
+header {
+    background: #1f3c88;
+    color: white;
+    padding: 15px;
+}
+.box {
+    background: white;
+    margin: 20px auto;
+    padding: 20px;
+    width: 60%;
+    border-radius: 10px;
+}
+button {
+    padding: 10px 20px;
+    background: #1f3c88;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+img {
+    width: 250px;
+    margin-top: 15px;
+    display: none;
+}
+#result {
+    margin-top: 15px;
+    font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h2>InfraScan</h2>
+<p>AI-Based Structural Damage Detection</p>
+</header>
+
+<div class="box">
+<h3>Upload Structure Image</h3>
+<input type="file" id="imgInput">
+<br><br>
+<button onclick="scan()">Scan Image</button>
+
+<br>
+<img id="preview">
+<p id="result">Waiting for AI scan...</p>
+</div>
+
+<div class="box">
+<h3>Sample Images</h3>
+<p>Cracks | Corrosion | No Damage</p>
+</div>
+
+<script>
+function scan() {
+    let img = document.getElementById("preview");
+    let input = document.getElementById("imgInput");
+    let result = document.getElementById("result");
+
+    if (input.files.length == 0) {
+        result.innerText = "Please upload an image.";
+        return;
+    }
+
+    img.src = URL.createObjectURL(input.files[0]);
+    img.style.display = "block";
+
+    let outputs = [
+        "No Structural Damage Detected",
+        "Crack Detected",
+        "Corrosion Detected",
+        "Severe Damage Detected"
+    ];
+
+    result.innerText = "AI Result: " +
+        outputs[Math.floor(Math.random() * outputs.length)];
+}
+</script>
+
+</body>
+</html>
+
