@@ -1,0 +1,31 @@
+function scan(){
+    let input = document.getElementById("imgInput");
+    let preview = document.getElementById("preview");
+    let result = document.getElementById("result");
+
+    if(input.files.length === 0){
+        result.innerText = "Upload image";
+        return;
+    }
+
+    let fileName = input.files[0].name.toLowerCase();
+    preview.src = URL.createObjectURL(input.files[0]);
+    preview.style.display = "block";
+
+    result.innerText = "Scanning...";
+
+    setTimeout(() => {
+        if(fileName.includes("crack")){
+            result.innerText = "Crack Detected";
+            result.style.color = "orange";
+        }
+        else if(fileName.includes("corrosion") || fileName.includes("rust")){
+            result.innerText = "Corrosion Detected";
+            result.style.color = "red";
+        }
+        else{
+            result.innerText = "No Damage Detected";
+            result.style.color = "green";
+        }
+    }, 1000);
+}
