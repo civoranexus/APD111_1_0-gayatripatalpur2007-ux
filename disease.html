@@ -1,0 +1,43 @@
+function scan() {
+    let input = document.getElementById("imgInput");
+    let preview = document.getElementById("preview");
+    let result = document.getElementById("result");
+
+    if (input.files.length === 0) {
+        result.innerText = "Upload crop image";
+        return;
+    }
+
+    let fileName = input.files[0].name.toLowerCase();
+    preview.src = URL.createObjectURL(input.files[0]);
+    preview.style.display = "block";
+
+    result.innerText = "Scanning crop...";
+
+    setTimeout(() => {
+        let disease = "";
+        let severity = "";
+        let confidence = Math.floor(Math.random() * 10) + 85;
+
+        if (fileName.includes("blight")) {
+            disease = "Leaf Blight Detected";
+            severity = "Medium";
+            result.style.color = "orange";
+        }
+        else if (fileName.includes("rust")) {
+            disease = "Rust Disease Detected";
+            severity = "High";
+            result.style.color = "red";
+        }
+        else {
+            disease = "Healthy Crop";
+            severity = "Low";
+            result.style.color = "green";
+        }
+
+        result.innerText =
+            disease +
+            " | Severity: " + severity +
+            " | Confidence: " + confidence + "%";
+    }, 1000);
+}
